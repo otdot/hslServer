@@ -1,0 +1,21 @@
+type Query {
+    stops(feeds: String): [Stop]
+    stopById(id: ID): Stop
+    userStops: [UserStop]
+}
+
+type Mutation {
+    addUserStop(stopIds: [String]): UserStop
+}
+
+type Stop {
+    id: ID
+    name: String
+    lat: Float
+    lon: Float
+}
+
+type UserStop {
+    id: String
+    stopIds: [String]
+}

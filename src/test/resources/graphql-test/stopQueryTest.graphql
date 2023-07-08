@@ -1,0 +1,8 @@
+query stopQueryTest($id: ID){
+    stopById(id: $id) {
+        name
+        id
+        lat
+        lon
+    }
+}
