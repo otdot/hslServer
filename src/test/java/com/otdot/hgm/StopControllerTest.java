@@ -1,5 +1,6 @@
 package com.otdot.hgm;
 
+import com.otdot.hgm.controllers.StopController;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;

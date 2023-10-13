@@ -1,0 +1,6 @@
+query GetStops {
+    stops {
+        id
+        name
+    }
+}

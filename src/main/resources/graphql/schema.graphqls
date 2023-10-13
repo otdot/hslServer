@@ -1,6 +1,6 @@
 type Query {
-    stops(feeds: String): [Stop]
-    stopById(id: ID): Stop
+    stops: [Stop]
+    stopByIds(id: ID): Stop
     userStops: [UserStop]
 }
 

@@ -1,4 +1,4 @@
-package com.otdot.hgm;
+package com.otdot.hgm.entities;
 
 import java.util.Arrays;
 import java.util.List;
