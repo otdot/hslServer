@@ -24,11 +24,11 @@ public class StopController {
     static OkHttpClient httpClient = new OkHttpClient();
 
     @PostMapping
-    public StopResponse getStops() throws IOException {
+    public StopResponse stopQuery(String query) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        RequestBody body = RequestBody.create(Queries.mediaType, Queries.STOPQUERY);
+        RequestBody body = RequestBody.create(Queries.mediaType, query);
         Request request = new Request.Builder()
                 .url(okClient.getApiUrl())
                 .post(body)

@@ -10,6 +10,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StopInnerResponse {
-    Stop stop;
+public class StopsInnerResponse {
+    List<Stop> stops;
 }

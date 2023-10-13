@@ -3,7 +3,7 @@ package com.otdot.hgm.entities;
 import java.util.Arrays;
 import java.util.List;
 
-public record Stop (String id, String name, double lat, double lon) {
+public record Stop (String gtfsId, String name, double lat, double lon) {
 
     private static List<Stop> stops = Arrays.asList(
             new Stop("stop-1", "Kalastajanmäki 1", 416.123, 416.123),
@@ -13,7 +13,7 @@ public record Stop (String id, String name, double lat, double lon) {
 
     public static Stop getById(String id) {
         return stops.stream()
-                .filter(stop -> stop.id().equals(id))
+                .filter(stop -> stop.gtfsId().equals(id))
                 .findFirst()
                 .orElse(null);
     }

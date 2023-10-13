@@ -92,25 +92,24 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>com.github.aoudiamoncef</groupId>
-				<artifactId>apollo-client-maven-plugin</artifactId>
-				<version>4.0.5</version>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.1.0</version>
 				<executions>
 					<execution>
+						<id>generate-apollo-sources</id>
 						<goals>
-							<goal>generate</goal>
+							<goal>java</goal>
 						</goals>
 						<configuration>
-							<services>
-								<example-api>
-									<compilationUnit>
-										<name>example</name>
-										<compilerParams>
-											<rootPackageName>com.example.graphql.client</rootPackageName>
-										</compilerParams>
-									</compilationUnit>
-								</example-api>
-							</services>
+							<mainClass>com.apollographql.apollo.gradle.ApolloGenerate</mainClass>
+							<arguments>
+								<argument>download-schema</argument>
+								<argument>src/main/resources/schema.json</argument> <!-- Path to your schema file -->
+								<argument>src/main/resources/graphql</argument> <!-- Path to your GraphQL queries directory -->
+								<argument>--endpoint</argument>
+								<argument>your-graphql-endpoint</argument> <!-- Your GraphQL endpoint URL -->
+							</arguments>
 						</configuration>
 					</execution>
 				</executions>

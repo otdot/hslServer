@@ -7,13 +7,24 @@ import org.springframework.stereotype.Component;
 public record Queries() {
 
     public static MediaType mediaType = MediaType.parse("application/graphql");
-    public static String STOPQUERY = "{\n" +
+    public static String STOPSQUERY = "{\n" +
             "  stops {\n" +
-            "    id\n" +
+            "    gtfsId\n" +
             "    name\n" +
             "    lat\n" +
             "    lon\n" +
             "  }\n" +
             "}";
+
+    public static String STOPQUERY(String id) {
+        return "{\n" +
+                "  stop (id:\"" + id + "\") {\n" +
+                "    gtfsId\n" +
+                "    name\n" +
+                "    lat\n" +
+                "    lon\n" +
+                "  }\n" +
+                "}";
+    }
 
 }

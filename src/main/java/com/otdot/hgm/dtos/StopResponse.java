@@ -1,6 +1,5 @@
 package com.otdot.hgm.dtos;
 
-import com.otdot.hgm.dtos.StopInnerResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
