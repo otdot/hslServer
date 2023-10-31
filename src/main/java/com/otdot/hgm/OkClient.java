@@ -8,8 +8,7 @@ import okhttp3.OkHttpClient;
 public class OkClient {
 
     public String getApiUrl() {
-        String apiUrl = "https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql?digitransit-subscription-key=" + System.getenv("API_KEY");
-        return apiUrl;
+        return "https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql?digitransit-subscription-key=" + System.getenv("API_KEY");
     }
 
     private static OkHttpClient httpClient = new OkHttpClient();
