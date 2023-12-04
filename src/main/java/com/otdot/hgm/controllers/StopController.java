@@ -15,21 +15,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @RestController
-@RequestMapping(path ="/api")
+@RequestMapping(path ="/api/stops")
 public class StopController {
 
     @Autowired
     OkClient okClient = new OkClient();
     static OkHttpClient httpClient = new OkHttpClient();
 
-    @PostMapping
+    @GetMapping
     public StopsResponse stopQuery(String query) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        RequestBody body = RequestBody.create(Queries.mediaType, query);
+        RequestBody body = RequestBody.create(Queries.mediaType, Objects.equals(query, null) ? Queries.STOPSQUERY : query);
         Request request = new Request.Builder()
                 .url(okClient.getApiUrl())
                 .post(body)
@@ -39,11 +40,6 @@ public class StopController {
 
         assert response.body() != null;
         return mapper.readValue(response.body().string(), StopsResponse.class);
-    }
-
-    @GetMapping
-    public String hello() {
-        return "Hello";
     }
 //
 //    @QueryMapping

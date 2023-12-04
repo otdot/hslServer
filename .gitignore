@@ -35,4 +35,4 @@ build/
 
 ### Enviromental variables ###
 *.env
-application.properties
+*.properties
