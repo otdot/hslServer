@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class StopResponse {
-    StopInnerResponse data;
+public class StopsResponse {
+    StopsInnerResponse data;
+
 }

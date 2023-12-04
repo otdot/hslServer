@@ -2,6 +2,7 @@ package com.otdot.hgm.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.otdot.hgm.OkClient;
+import com.otdot.hgm.dtos.StopsResponse;
 import com.otdot.hgm.queries.Queries;
 import com.otdot.hgm.dtos.StopResponse;
 import okhttp3.OkHttpClient;
@@ -24,7 +25,7 @@ public class StopController {
     static OkHttpClient httpClient = new OkHttpClient();
 
     @PostMapping
-    public StopResponse stopQuery(String query) throws IOException {
+    public StopsResponse stopQuery(String query) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -36,8 +37,8 @@ public class StopController {
 
         okhttp3.Response response = httpClient.newCall(request).execute();
 
-        StopResponse stopResponse = mapper.readValue(response.body().string(), StopResponse.class);
-        return stopResponse;
+        assert response.body() != null;
+        return mapper.readValue(response.body().string(), StopsResponse.class);
     }
 
     @GetMapping

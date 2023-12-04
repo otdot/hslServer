@@ -10,6 +10,7 @@ type Mutation {
 
 type Stop {
     id: ID
+    gtfsId: String
     name: String
     lat: Float
     lon: Float
