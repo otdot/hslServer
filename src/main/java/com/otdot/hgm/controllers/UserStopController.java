@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/test")
@@ -26,9 +27,15 @@ public class UserStopController {
     public List<UserStop> userStops() {
         return userStopService.userStops();
     }
+    @QueryMapping
+    public Optional<UserStop> userStop(@Argument String id)  { return userStopService.userStop(id); }
 
     @MutationMapping
     public UserStop addUserStop(@Argument List<String> stopIds) {
         return userStopService.addUserStop(stopIds);
+    }
+    @MutationMapping
+    public UserStop updateUserStop(@Argument String id, @Argument List<String> stopIds) {
+        return userStopService.updateUserStop(id, stopIds);
     }
 }

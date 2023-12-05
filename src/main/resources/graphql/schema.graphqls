@@ -2,10 +2,12 @@ type Query {
     stops: [Stop]
     stopByIds(id: ID): Stop
     userStops: [UserStop]
+    userStop(id: ID): UserStop
 }
 
 type Mutation {
     addUserStop(stopIds: [String]): UserStop
+    updateUserStop(id: ID!, stopIds: [String]): UserStop
 }
 
 type Stop {
