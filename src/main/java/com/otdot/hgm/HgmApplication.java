@@ -25,6 +25,7 @@ public class HgmApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/api/stops").allowedOrigins("http://localhost:19006");
+				registry.addMapping("/graphql").allowedOrigins("http://localhost:19006");
 			}
 		};
 	}
