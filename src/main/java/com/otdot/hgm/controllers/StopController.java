@@ -3,17 +3,21 @@ package com.otdot.hgm.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.otdot.hgm.OkClient;
 import com.otdot.hgm.dtos.StopsResponse;
+import com.otdot.hgm.entities.Stop;
 import com.otdot.hgm.queries.Queries;
 import com.otdot.hgm.dtos.StopResponse;
+import com.otdot.hgm.services.StopService;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.List;
 
 @RestController
 @RequestMapping(path ="/api")
@@ -23,7 +27,10 @@ public class StopController {
     OkClient okClient = new OkClient();
     static OkHttpClient httpClient = new OkHttpClient();
     ObjectMapper mapper = new ObjectMapper();
+    private final StopService stopService;
 
+    @Autowired
+    public StopController(StopService stopService) { this.stopService = stopService; }
 
     private okhttp3.Response queryDb(String query) throws IOException {
 
@@ -48,6 +55,24 @@ public class StopController {
         okhttp3.Response response = queryDb(Queries.STOPQUERY(id));
         assert response.body() != null;
         return mapper.readValue(response.body().string(), StopResponse.class);
+    }
+
+    @QueryMapping
+    public Page<Stop> stops(@Argument int pageNum, @Argument int pageSize) throws IOException {
+        return stopService.stops(pageNum, pageSize);
+    }
+
+    @GetMapping("/saveStops")
+    public String saveStopsQuery() throws IOException {
+        if (stopService.collectionHasData()) {
+            stopService.deleteAllStops();
+        }
+        StopsResponse stops = stopsQuery();
+        for (Stop stop : stops.getData().getStops()) {
+            stopService.addStop(stop);
+            System.out.printf(String.format("add %s \n", stop.getName()));
+        }
+        return "Ok";
     }
 
 }

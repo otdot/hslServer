@@ -11,5 +11,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StopsInnerResponse {
+
     List<Stop> stops;
+
+    public List<Stop> getStops() { return stops; }
+
 }

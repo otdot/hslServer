@@ -1,17 +1,17 @@
 type Query {
-    stops: [Stop]
-    stopByIds(id: ID): Stop
+    stops(pageNum: Int!, pageSize: Int!): [Stop]
+    stopById(id: ID): Stop
     userStops: [UserStop]
     userStop(id: ID): UserStop
 }
 
 type Mutation {
     addUserStop(stopIds: [String]): UserStop
+    addStop(stop: StopInput): Stop
     updateUserStop(id: ID!, stopIds: [String]): UserStop
 }
 
 type Stop {
-    id: ID
     gtfsId: String
     name: String
     lat: Float
@@ -21,4 +21,11 @@ type Stop {
 type UserStop {
     id: String
     stopIds: [String]
+}
+
+input StopInput {
+    gtfsId: String
+    name: String
+    lat: Float
+    lon: Float
 }

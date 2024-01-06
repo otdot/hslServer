@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class StopsResponse {
+
     StopsInnerResponse data;
+
+    public StopsInnerResponse getData() { return data; }
 
 }

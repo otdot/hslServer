@@ -1,20 +1,22 @@
 package com.otdot.hgm.entities;
 
-import java.util.Arrays;
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public record Stop (String gtfsId, String name, double lat, double lon) {
+@Document
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Stop {
 
-    private static List<Stop> stops = Arrays.asList(
-            new Stop("stop-1", "Kalastajanmäki 1", 416.123, 416.123),
-            new Stop("stop-2", "Kampintori 2", 208.5342, 416.223),
-            new Stop("stop-3", "Pohjolankatu 1", 436.534, 208.5342)
-    );
+    @Id
+    private String id;
+    private String gtfsId;
+    private String name;
+    private double lat;
+    private double lon;
 
-    public static Stop getById(String id) {
-        return stops.stream()
-                .filter(stop -> stop.gtfsId().equals(id))
-                .findFirst()
-                .orElse(null);
-    }
 }
