@@ -2,6 +2,7 @@ package com.otdot.hgm.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.otdot.hgm.OkClient;
+import com.otdot.hgm.dtos.StopResGQLDTO;
 import com.otdot.hgm.dtos.StopsResponse;
 import com.otdot.hgm.entities.Stop;
 import com.otdot.hgm.queries.Queries;
@@ -17,7 +18,6 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequestMapping(path ="/api")
@@ -58,8 +58,9 @@ public class StopController {
     }
 
     @QueryMapping
-    public Page<Stop> stops(@Argument int pageNum, @Argument int pageSize) throws IOException {
-        return stopService.stops(pageNum, pageSize);
+    public StopResGQLDTO stops(@Argument int pageNum, @Argument int pageSize){
+        Page<Stop> stops = stopService.stops(pageNum, pageSize);
+        return new StopResGQLDTO(stops, stops.hasNext());
     }
 
     @GetMapping("/saveStops")

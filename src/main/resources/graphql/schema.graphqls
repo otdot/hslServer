@@ -1,5 +1,5 @@
 type Query {
-    stops(pageNum: Int!, pageSize: Int!): [Stop]
+    stops(pageNum: Int!, pageSize: Int!): StopRes
     stopById(id: ID): Stop
     userStops: [UserStop]
     userStop(id: ID): UserStop
@@ -9,6 +9,7 @@ type Mutation {
     addUserStop(stopIds: [String]): UserStop
     addStop(stop: StopInput): Stop
     updateUserStop(id: ID!, stopIds: [String]): UserStop
+    addUser(userInput: UserInput): User
 }
 
 type Stop {
@@ -16,11 +17,26 @@ type Stop {
     name: String
     lat: Float
     lon: Float
+ }
+
+type StopRes {
+    stops: [Stop]
+    hasNext: Boolean
 }
 
 type UserStop {
     id: String
     stopIds: [String]
+}
+
+type User {
+    username: String
+    password: String
+}
+
+input UserInput {
+    username: String
+    password: String
 }
 
 input StopInput {
