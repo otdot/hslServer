@@ -7,13 +7,17 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Optional;
 
+/*
+The @RequestMapping is only for doing requests to /test. Api is available in /graphql even without it.
+ */
 @Controller
-@RequestMapping(value = "/test")
+@RequestMapping(path = "/test")
 public class UserStopController {
 
     private final UserStopService userStopService;
