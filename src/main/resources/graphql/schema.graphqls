@@ -3,10 +3,11 @@ type Query {
     stopById(id: ID): Stop
     userStops: [UserStop]
     userStop(id: ID): UserStop
+    getUser(id: ID): User
 }
 
 type Mutation {
-    addUserStop(stopIds: [String]): UserStop
+    addUserStop(stopIds: UserStopInput): UserStop
     addStop(stop: StopInput): Stop
     updateUserStop(id: ID!, stopIds: [String]): UserStop
     addUser(userInput: UserInput): User
@@ -26,10 +27,12 @@ type StopRes {
 
 type UserStop {
     id: String
-    stopIds: [String]
+    user: User
+    stops: [Stop]
 }
 
 type User {
+    id: String
     username: String
     password: String
 }
@@ -37,6 +40,11 @@ type User {
 input UserInput {
     username: String
     password: String
+}
+
+input UserStopInput {
+    userId: String
+    gtfsId: [String]
 }
 
 input StopInput {

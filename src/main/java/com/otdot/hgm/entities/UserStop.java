@@ -2,6 +2,7 @@ package com.otdot.hgm.entities;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -11,10 +12,13 @@ public class UserStop {
 
     @Id
     private String id;
-    private List<String> stopIds;
+    @Indexed(unique = true)
+    private User user;
+    private List<Stop> stops;
 
-    public UserStop(List<String> stopIds) {
-        this.stopIds = stopIds;
+    public UserStop(User user, List<Stop> stops) {
+        this.user = user;
+        this.stops = stops;
     }
 
 }

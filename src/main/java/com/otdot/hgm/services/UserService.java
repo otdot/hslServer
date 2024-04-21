@@ -6,6 +6,8 @@ import com.otdot.hgm.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -20,5 +22,9 @@ public class UserService {
 
     public User findUser(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public Optional<User> findUserById(String id) {
+        return userRepository.findById(id);
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -21,6 +20,7 @@ The @RequestMapping is only for doing requests to /test. Api is available in /gr
 public class UserStopController {
 
     private final UserStopService userStopService;
+    public record UserStopInput(String userId, List<String> gtfsId) { };
 
     @Autowired
     public UserStopController(UserStopService userStopService) {
@@ -32,10 +32,12 @@ public class UserStopController {
         return userStopService.userStops();
     }
     @QueryMapping
-    public Optional<UserStop> userStop(@Argument String id)  { return userStopService.userStop(id); }
+    public Optional<UserStop> userStop(@Argument String id)  {
+        return userStopService.userStop(id);
+    }
 
     @MutationMapping
-    public UserStop addUserStop(@Argument List<String> stopIds) {
+    public UserStop addUserStop(@Argument UserStopInput stopIds) {
         return userStopService.addUserStop(stopIds);
     }
     @MutationMapping

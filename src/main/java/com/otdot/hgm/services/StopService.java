@@ -43,4 +43,8 @@ public class StopService {
         return stopRepository.count() > 0;
     }
 
+    public Stop findByGtfsId(String gtfsId) {
+        return stopRepository.findByGtfsId(gtfsId);
+    }
+
 }
