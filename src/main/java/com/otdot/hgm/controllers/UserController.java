@@ -4,6 +4,7 @@ package com.otdot.hgm.controllers;
 import com.otdot.hgm.entities.User;
 import com.otdot.hgm.security.SecurityConfig;
 import com.otdot.hgm.services.UserService;
+import com.otdot.hgm.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -31,6 +32,9 @@ public class UserController {
     SecurityConfig securityConfig;
 
     @Autowired
+    JwtUtils jwtUtils;
+
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -47,11 +51,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public Authentication login(@RequestBody UserInput userInput) {
+    public String login(@RequestBody UserInput userInput) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userInput.username(), userInput.password());
         Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         // you can use HttpSessionSecurityContextRepository to save the authenticated user in the SecurityContextRepository
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return authentication;
+        return jwtUtils.generateJwtToken(authentication);
     }
 }
