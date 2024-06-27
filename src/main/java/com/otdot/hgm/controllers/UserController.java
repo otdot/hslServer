@@ -55,7 +55,8 @@ public class UserController {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userInput.username(), userInput.password());
         Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         // you can use HttpSessionSecurityContextRepository to save the authenticated user in the SecurityContextRepository
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return jwtUtils.generateJwtToken(authentication);
+        SecurityContextHolder.getContext().setAuthentication(authentication); // Onko tämä tarvittava jos jokaisessa pyynnössä tulee olla tokeni?
+        String token = jwtUtils.generateJwtToken(authentication);
+        return token;
     }
 }
