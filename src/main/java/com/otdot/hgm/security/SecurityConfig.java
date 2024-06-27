@@ -23,8 +23,6 @@ public class SecurityConfig{
     private static final int PW_ENCODER_STRENGTH = 16;
     @Autowired
     private final UserDetailsServiceImpl userDetailsService;
-    @Autowired
-    AuthTokenFilter authenticationJwtTokenFilter;
 
     public SecurityConfig(UserDetailsServiceImpl userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -38,7 +36,7 @@ public class SecurityConfig{
                         .requestMatchers("/auth/login").permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(authenticationJwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -63,6 +61,11 @@ public class SecurityConfig{
         return new BCryptPasswordEncoder(PW_ENCODER_STRENGTH, new SecureRandom());
     }
 
+
+    @Bean
+    public AuthTokenFilter authTokenFilter() {
+        return new AuthTokenFilter();
+    }
 
 
 //    @Bean
