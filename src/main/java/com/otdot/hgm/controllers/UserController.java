@@ -24,6 +24,7 @@ public class UserController {
 
     private final UserService userService;
     private record UserInput(String username, String password) { };
+    private record LoginResponse(String token) {}
 
 
     @Autowired
@@ -51,12 +52,12 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody UserInput userInput) {
+    public LoginResponse login(@RequestBody UserInput userInput) {
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userInput.username(), userInput.password());
         Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         // you can use HttpSessionSecurityContextRepository to save the authenticated user in the SecurityContextRepository
         SecurityContextHolder.getContext().setAuthentication(authentication); // Onko tämä tarvittava jos jokaisessa pyynnössä tulee olla tokeni?
         String token = jwtUtils.generateJwtToken(authentication);
-        return token;
+        return new LoginResponse(token);
     }
 }

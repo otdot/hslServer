@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class JwtUtils {
 
     private final String jwtSecret = "TivoliRadioMustBeFancyRadioAndKeepInMindToUseStrongKeys987654321";
-    private final long jwtExpirationMs = Duration.of(1, TimeUnit.DAYS.toChronoUnit()).toMillis();
+    private static final long ONE_DAY = Duration.of(1, TimeUnit.DAYS.toChronoUnit()).toMillis();
 
     private SecretKey getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);
@@ -35,7 +35,7 @@ public class JwtUtils {
         return Jwts.builder()
                 .subject(userPrincipal.getUsername())
                 .issuedAt(now)
-                .expiration(new Date(now.getTime() + 1000 * 60 * 60 * 24))
+                .expiration(new Date(now.getTime() + ONE_DAY))
                 .signWith(getSigningKey())
                 .compact();
     }
