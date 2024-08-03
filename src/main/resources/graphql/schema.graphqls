@@ -7,7 +7,7 @@ type Query {
 }
 
 type Mutation {
-    addUserStop(stopIds: UserStopInput): UserStop
+    addUserStop(stopIds: [String]): UserStop
     addStop(stop: StopInput): Stop
     updateUserStop(id: ID!, stopIds: [String]): UserStop
     addUser(userInput: UserInput): User
@@ -40,11 +40,6 @@ type User {
 input UserInput {
     username: String
     password: String
-}
-
-input UserStopInput {
-    userId: String
-    gtfsId: [String]
 }
 
 input StopInput {

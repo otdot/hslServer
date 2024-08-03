@@ -1,8 +1,8 @@
 package com.otdot.hgm.controllers;
 
-
 import com.otdot.hgm.entities.User;
 import com.otdot.hgm.security.SecurityConfig;
+import com.otdot.hgm.security.UserDetailsImpl;
 import com.otdot.hgm.services.UserService;
 import com.otdot.hgm.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class UserController {
 
     private final UserService userService;
     private record UserInput(String username, String password) { };
-    private record LoginResponse(String token) {}
+    private record LoginResponse(String id, String token) {}
 
 
     @Autowired
@@ -57,7 +57,8 @@ public class UserController {
         Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         // you can use HttpSessionSecurityContextRepository to save the authenticated user in the SecurityContextRepository
         SecurityContextHolder.getContext().setAuthentication(authentication); // Onko tämä tarvittava jos jokaisessa pyynnössä tulee olla tokeni?
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
         String token = jwtUtils.generateJwtToken(authentication);
-        return new LoginResponse(token);
+        return new LoginResponse(user.getId(), token);
     }
 }

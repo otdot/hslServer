@@ -2,12 +2,11 @@ package com.otdot.hgm.services;
 
 import com.otdot.hgm.daos.UserRepository;
 import com.otdot.hgm.entities.User;
+import com.otdot.hgm.security.UserDetailsImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -23,7 +22,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        // Vika argumentti on lista permissions/roles.
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
+        return UserDetailsImpl.build(user);
     }
 }

@@ -1,5 +1,6 @@
 package com.otdot.hgm.utils;
 
+import com.otdot.hgm.security.UserDetailsImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -29,11 +30,11 @@ public class JwtUtils {
     }
 
     public String generateJwtToken(Authentication authentication) {
-        User userPrincipal = (User) authentication.getPrincipal();
+        UserDetailsImpl user = (UserDetailsImpl) authentication.getPrincipal();
         Date now = new Date();
 
         return Jwts.builder()
-                .subject(userPrincipal.getUsername())
+                .subject(user.getUsername())
                 .issuedAt(now)
                 .expiration(new Date(now.getTime() + ONE_DAY))
                 .signWith(getSigningKey())
