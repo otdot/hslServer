@@ -1,7 +1,10 @@
 package com.otdot.hgm.controllers;
 
+import com.otdot.hgm.entities.Stop;
+import com.otdot.hgm.entities.User;
 import com.otdot.hgm.entities.UserStop;
 import com.otdot.hgm.services.UserStopService;
+import com.otdot.hgm.utils.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -10,21 +13,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
-import java.util.Optional;
 
-/*
-The @RequestMapping is only for doing requests to /test. Api is available in /graphql even without it.
+/**
+ * The @RequestMapping is only for doing requests to /test. Api is available in /graphql even without it.
  */
 @Controller
 @RequestMapping(path = "/test")
 public class UserStopController {
 
     private final UserStopService userStopService;
-    public record UserStopInput(String userId, List<String> gtfsId) { };
+    private final SecurityContextUtils securityContextUtils;
 
     @Autowired
-    public UserStopController(UserStopService userStopService) {
+    public UserStopController(UserStopService userStopService, SecurityContextUtils securityContextUtils) {
         this.userStopService = userStopService;
+        this.securityContextUtils = securityContextUtils;
     }
 
     @QueryMapping
@@ -32,16 +35,19 @@ public class UserStopController {
         return userStopService.userStops();
     }
     @QueryMapping
-    public Optional<UserStop> userStop(@Argument String id)  {
-        return userStopService.userStop(id);
+    public UserStop userStop()  {
+        User user = securityContextUtils.getUserFromSecurityContext();
+        return userStopService.userStop(user.getId());
     }
 
     @MutationMapping
-    public UserStop addUserStop(@Argument UserStopInput stopIds) {
-        return userStopService.addUserStop(stopIds);
+    public Stop addUserStop(@Argument String stopIds) {
+        User user = securityContextUtils.getUserFromSecurityContext();
+        return userStopService.addUserStop(user, stopIds);
     }
     @MutationMapping
-    public UserStop updateUserStop(@Argument String id, @Argument List<String> stopIds) {
-        return userStopService.updateUserStop(id, stopIds);
+    public Stop updateUserStop(@Argument String stopIds) {
+        User user = securityContextUtils.getUserFromSecurityContext();
+        return userStopService.updateUserStop(user.getId(), stopIds);
     }
 }

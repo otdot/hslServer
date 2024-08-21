@@ -1,6 +1,5 @@
 package com.otdot.hgm.services;
 
-import com.otdot.hgm.controllers.UserStopController;
 import com.otdot.hgm.entities.Stop;
 import com.otdot.hgm.entities.User;
 import com.otdot.hgm.entities.UserStop;
@@ -8,19 +7,16 @@ import com.otdot.hgm.daos.UserStopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserStopService {
     private final UserStopRepository userStopRepository;
-    private final UserService userService;
     private final StopService stopService;
 
     @Autowired
     public UserStopService(UserStopRepository userStopRepository, UserService userService, StopService stopService) {
         this.userStopRepository = userStopRepository;
-        this.userService = userService;
         this.stopService = stopService;
     }
 
@@ -28,34 +24,35 @@ public class UserStopService {
         return userStopRepository.findAll();
     }
 
-    public Optional<UserStop> userStop(String id) {
-        return userStopRepository.findById(id);
+    public UserStop userStop(String id) {
+        return userStopRepository.findByUserId(id);
     }
 
-    public UserStop addUserStop(UserStopController.UserStopInput stopIds) {
-        UserStop userStop = userStopRepository.findByUserId(stopIds.userId());
+    public Stop addUserStop(User user, String stopId) {
+        UserStop userStop = userStopRepository.findByUserId(user.getId());
         if (userStop != null) {
-            return updateUserStop(stopIds.userId(), stopIds.gtfsId());
+            return updateUserStop(user.getId(), stopId);
         }
 
-        User user = userService.findUserById(stopIds.userId()).orElse(null);
-        List<Stop> stops = stopIds.gtfsId().stream().map(stopService::findByGtfsId).toList();
-        assert user != null;
+        Stop stop = stopService.findByGtfsId(stopId);
+        // handle cases when stop not found
 
-        UserStop newUserStop = new UserStop(user, stops);
-        return userStopRepository.save(newUserStop);
+        UserStop newUserStop = new UserStop(user, new HashSet<>(Collections.singletonList(stop)));
+
+        userStopRepository.save(newUserStop);
+        return stop;
     }
 
-    public UserStop updateUserStop(String id, List<String> stopIds) {
+    public Stop updateUserStop(String id, String stopId) {
         UserStop userStop = userStopRepository.findByUserId(id);
         assert userStop != null;
 
-
-        List<Stop> stops = userStop.getStops();
-        List<Stop> newStops = stopIds.stream().map(stopService::findByGtfsId).toList();
-        stops.addAll(newStops);
+        HashSet<Stop> stops = userStop.getStops();
+        Stop newStop = stopService.findByGtfsId(stopId);
+        stops.add(newStop);
         userStop.setStops(stops);
 
-        return userStopRepository.save(userStop);
+        userStopRepository.save(userStop);
+        return newStop;
     }
 }

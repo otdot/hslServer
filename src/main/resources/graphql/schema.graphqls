@@ -2,14 +2,14 @@ type Query {
     stops(pageNum: Int!, pageSize: Int!): StopRes
     stopById(id: ID): Stop
     userStops: [UserStop]
-    userStop(id: ID): UserStop
+    userStop: UserStop
     getUser(id: ID): User
 }
 
 type Mutation {
-    addUserStop(stopIds: [String]): UserStop
+    addUserStop(stopIds: String): Stop
     addStop(stop: StopInput): Stop
-    updateUserStop(id: ID!, stopIds: [String]): UserStop
+    updateUserStop(id: ID!, stopIds: [String]): Stop
     addUser(userInput: UserInput): User
 }
 
@@ -27,6 +27,7 @@ type StopRes {
 
 type UserStop {
     id: String
+    gtfsId: String
     user: User
     stops: [Stop]
 }
