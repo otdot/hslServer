@@ -8,7 +8,6 @@ import com.otdot.hgm.entities.Stop;
 import com.otdot.hgm.queries.Queries;
 import com.otdot.hgm.dtos.StopResponse;
 import com.otdot.hgm.services.StopService;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping(path ="/api")
@@ -25,7 +25,6 @@ public class StopController {
 
     @Autowired
     OkClient okClient = new OkClient();
-    static OkHttpClient httpClient = new OkHttpClient();
     ObjectMapper mapper = new ObjectMapper();
     private final StopService stopService;
 
@@ -40,7 +39,7 @@ public class StopController {
                 .post(body)
                 .build();
 
-        return httpClient.newCall(request).execute();
+        return OkClient.httpClient.newCall(request).execute();
     }
 
     @GetMapping("/stops")
@@ -74,6 +73,14 @@ public class StopController {
             System.out.printf(String.format("add %s \n", stop.getName()));
         }
         return "Ok";
+    }
+
+    @QueryMapping
+    public List<Stop> findStopByQuery(@Argument String searchStr) {
+        if (searchStr.isBlank()) {
+            return List.of();
+        }
+        return stopService.findByRegex(searchStr);
     }
 
 }

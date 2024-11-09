@@ -4,6 +4,7 @@ type Query {
     userStops: [UserStop]
     userStop: UserStop
     getUser(id: ID): User
+    findStopByQuery(searchStr: String): [Stop]
 }
 
 type Mutation {

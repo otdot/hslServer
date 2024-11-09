@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,6 +44,10 @@ public class StopService {
 
     public Stop findByGtfsId(String gtfsId) {
         return stopRepository.findByGtfsId(gtfsId);
+    }
+
+    public List<Stop> findByRegex(String searchStr) {
+        return stopRepository.findByQueryWithExpression(searchStr);
     }
 
 }

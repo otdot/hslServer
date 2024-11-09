@@ -11,7 +11,7 @@ public class OkClient {
         return "https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql?digitransit-subscription-key=" + System.getenv("API_KEY");
     }
 
-    private static OkHttpClient httpClient = new OkHttpClient();
+    public static OkHttpClient httpClient = new OkHttpClient();
 
     public ApolloClient apolloClient = ApolloClient.builder().serverUrl(getApiUrl()).okHttpClient(httpClient).build();
 
