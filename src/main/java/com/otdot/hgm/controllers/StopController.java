@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.otdot.hgm.OkClient;
 import com.otdot.hgm.dtos.StopResGQLDTO;
 import com.otdot.hgm.dtos.StopsResponse;
-import com.otdot.hgm.entities.Stop;
+import com.otdot.hgm.documents.Stop;
 import com.otdot.hgm.queries.Queries;
 import com.otdot.hgm.dtos.StopResponse;
 import com.otdot.hgm.services.StopService;
@@ -24,7 +24,7 @@ import java.util.List;
 public class StopController {
 
     @Autowired
-    OkClient okClient = new OkClient();
+    OkClient okClient;
     ObjectMapper mapper = new ObjectMapper();
     private final StopService stopService;
 

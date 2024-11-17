@@ -1,7 +1,7 @@
 package com.otdot.hgm.utils;
 
 
-import com.otdot.hgm.entities.User;
+import com.otdot.hgm.documents.User;
 import com.otdot.hgm.security.UserDetailsImpl;
 import com.otdot.hgm.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

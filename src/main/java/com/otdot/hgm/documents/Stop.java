@@ -1,4 +1,4 @@
-package com.otdot.hgm.entities;
+package com.otdot.hgm.documents;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

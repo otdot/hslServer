@@ -39,6 +39,19 @@ type User {
     password: String
 }
 
+type Stoptime {
+    stop: Stop
+    scheduledArrival: Int
+}
+
+type Trip {
+    id: String
+    gtfsId: String
+    directionId: Int
+    stops: [Stop]
+    stopTimes: [Stoptime]
+}
+
 input UserInput {
     username: String
     password: String

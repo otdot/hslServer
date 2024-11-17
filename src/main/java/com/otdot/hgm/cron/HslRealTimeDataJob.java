@@ -19,8 +19,8 @@ public class HslRealTimeDataJob {
         this.gtfsRtService = gtfsRtService;
         this.gtfsRtUtils = gtfsRtUtils;
     }
-
-    @Scheduled(fixedRate = 30000)
+//    TODO: How to utilize the feed?
+//    @Scheduled(fixedRate = 30000)
     private void updateHslVechicleInformation() {
         FeedMessage feedMessage = gtfsRtService.getGtfsRtRealTimeData(HslGtfsRtEndpoints.LOCATIONS);
         gtfsRtUtils.parseGtfsRtData(feedMessage);

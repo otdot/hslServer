@@ -1,6 +1,6 @@
 package com.otdot.hgm.controllers;
 
-import com.otdot.hgm.entities.User;
+import com.otdot.hgm.documents.User;
 import com.otdot.hgm.security.SecurityConfig;
 import com.otdot.hgm.security.UserDetailsImpl;
 import com.otdot.hgm.services.UserService;

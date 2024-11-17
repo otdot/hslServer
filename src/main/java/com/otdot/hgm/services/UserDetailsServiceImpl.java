@@ -1,7 +1,7 @@
 package com.otdot.hgm.services;
 
 import com.otdot.hgm.daos.UserRepository;
-import com.otdot.hgm.entities.User;
+import com.otdot.hgm.documents.User;
 import com.otdot.hgm.security.UserDetailsImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

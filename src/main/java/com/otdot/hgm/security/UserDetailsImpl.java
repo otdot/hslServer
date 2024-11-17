@@ -1,7 +1,7 @@
 package com.otdot.hgm.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.otdot.hgm.entities.User;
+import com.otdot.hgm.documents.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

@@ -1,6 +1,6 @@
 package com.otdot.hgm.daos;
 
-import com.otdot.hgm.entities.Stop;
+import com.otdot.hgm.documents.Stop;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 

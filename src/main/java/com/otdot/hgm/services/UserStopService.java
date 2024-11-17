@@ -1,8 +1,8 @@
 package com.otdot.hgm.services;
 
-import com.otdot.hgm.entities.Stop;
-import com.otdot.hgm.entities.User;
-import com.otdot.hgm.entities.UserStop;
+import com.otdot.hgm.documents.Stop;
+import com.otdot.hgm.documents.User;
+import com.otdot.hgm.documents.UserStop;
 import com.otdot.hgm.daos.UserStopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -2,7 +2,7 @@ package com.otdot.hgm.services;
 
 
 import com.otdot.hgm.daos.UserRepository;
-import com.otdot.hgm.entities.User;
+import com.otdot.hgm.documents.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
