@@ -1,4 +1,4 @@
-package com.otdot.hgm.documents;
+package com.otdot.hgm.collections;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

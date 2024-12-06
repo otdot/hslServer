@@ -1,8 +1,8 @@
 package com.otdot.hgm.controllers;
 
-import com.otdot.hgm.documents.Stop;
-import com.otdot.hgm.documents.User;
-import com.otdot.hgm.documents.UserStop;
+import com.otdot.hgm.collections.Stop;
+import com.otdot.hgm.collections.User;
+import com.otdot.hgm.collections.UserStop;
 import com.otdot.hgm.services.UserStopService;
 import com.otdot.hgm.utils.SecurityContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;

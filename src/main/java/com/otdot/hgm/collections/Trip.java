@@ -1,4 +1,4 @@
-package com.otdot.hgm.documents;
+package com.otdot.hgm.collections;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -12,6 +12,8 @@ type Mutation {
     addStop(stop: StopInput): Stop
     updateUserStop(id: ID!, stopIds: [String]): Stop
     addUser(userInput: UserInput): User
+    addTrip(tripInput: TripInput): Boolean
+    addRoute(routeInput: RouteInput): Boolean
 }
 
 type Stop {
@@ -62,4 +64,16 @@ input StopInput {
     name: String
     lat: Float
     lon: Float
+}
+
+input TripInput {
+    gtfsId: String
+    directionId: String
+    stopIds: [Int]
+    stoptimeIds: [Int]
+}
+
+input RouteInput {
+    gtfsId: String
+    stopIds: [Int]
 }

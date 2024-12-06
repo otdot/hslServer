@@ -1,7 +1,7 @@
 package com.otdot.hgm.services;
 
-import com.otdot.hgm.daos.StopRepository;
-import com.otdot.hgm.documents.Stop;
+import com.otdot.hgm.repositories.StopRepository;
+import com.otdot.hgm.collections.Stop;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

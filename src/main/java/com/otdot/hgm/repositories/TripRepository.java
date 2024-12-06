@@ -1,7 +1,7 @@
-package com.otdot.hgm.daos;
+package com.otdot.hgm.repositories;
 
-import com.otdot.hgm.documents.Stop;
-import com.otdot.hgm.documents.Trip;
+import com.otdot.hgm.collections.Stop;
+import com.otdot.hgm.collections.Trip;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

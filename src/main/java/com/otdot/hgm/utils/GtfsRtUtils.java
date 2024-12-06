@@ -13,13 +13,13 @@ public class GtfsRtUtils {
         gtfsRtMessage.getEntityList().forEach(feedEntity -> {
             if (feedEntity.hasTripUpdate()) {
                 TripUpdate tripUpdate = feedEntity.getTripUpdate();
-                // Process trip update data
+                System.out.println(tripUpdate);
             } else if (feedEntity.hasVehicle()) {
                 VehiclePosition vehiclePosition = feedEntity.getVehicle();
-                // Process vehicle position data
+                System.out.println(vehiclePosition);
             } else if (feedEntity.hasAlert()) {
                 Alert alert = feedEntity.getAlert();
-                // Process alert data
+                System.out.println(alert);
             }
         });
     }

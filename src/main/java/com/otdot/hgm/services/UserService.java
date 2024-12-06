@@ -1,8 +1,8 @@
 package com.otdot.hgm.services;
 
 
-import com.otdot.hgm.daos.UserRepository;
-import com.otdot.hgm.documents.User;
+import com.otdot.hgm.repositories.UserRepository;
+import com.otdot.hgm.collections.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
