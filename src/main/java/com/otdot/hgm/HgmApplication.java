@@ -1,5 +1,10 @@
 package com.otdot.hgm;
 
+import com.otdot.hgm.controllers.StopController;
+import com.otdot.hgm.controllers.TripController;
+import com.otdot.hgm.dtos.TripRes;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +20,10 @@ public class HgmApplication {
 		SpringApplication.run(HgmApplication.class, args);
 	}
 
+	@Autowired
+	TripController tripController;
+
+
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
@@ -26,14 +35,12 @@ public class HgmApplication {
 		};
 	}
 
-//	@Bean
-//	CommandLineRunner runner(){
-//
-//		return args -> {
-//			StopController stopController = new StopController();
-//			StopsResponse object = stopController.stopQuery(Queries.STOPSQUERY);
-//
-//			System.out.println(object);
-//		};
-//	}
+	@Bean
+	CommandLineRunner runner(){
+
+		return args -> {
+			TripRes object = tripController.saveTrips();
+			System.out.println(object);
+		};
+	}
 }

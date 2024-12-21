@@ -31,7 +31,7 @@ public class StopController {
     @Autowired
     public StopController(StopService stopService) { this.stopService = stopService; }
 
-    private okhttp3.Response queryDb(String query) throws IOException {
+    public okhttp3.Response queryDb(String query) throws IOException {
 
         RequestBody body = RequestBody.create(Queries.mediaType, Queries.STOPSQUERY);
         Request request = new Request.Builder()
@@ -68,7 +68,7 @@ public class StopController {
             stopService.deleteAllStops();
         }
         StopsResponse stops = stopsQuery();
-        for (Stop stop : stops.getData().getStops()) {
+        for (Stop stop : (List<Stop>) stops.getData().getStops()) {
             stopService.addStop(stop);
             System.out.printf(String.format("add %s \n", stop.getName()));
         }

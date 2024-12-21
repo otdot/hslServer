@@ -27,23 +27,10 @@ public record Queries() {
                 "}";
     }
 
-    public static String TRIPSQUERY(String id) {
-        return "{\n" +
+    public static String TRIPSQUERY = "{\n" +
                 "  trips {\n" +
                 "    gtfsId\n" +
-                "    name\n" +
                 "    directionId\n" +
-                "    stops {\n" +
-                "      gtfsId \n" +
-                "    }\n" +
-                "    stoptimes {\n" +
-                "      stop {\n" +
-                "        gtfsId\n" +
-                "      }\n" +
-                "      scheduledArrival\n" +
-                "    }\n" +
                 "  }\n" +
                 "}";
-    }
-
 }
