@@ -33,4 +33,16 @@ public record Queries() {
                 "    directionId\n" +
                 "  }\n" +
                 "}";
+
+    public static String TRIPSQUERY(String id) {
+        return "{\n" +
+                "  trip(id: \"" + id + "\") {\n" +
+                "    gtfsId\n" +
+                "    directionId\n" +
+                "    stops {\n" +
+                "      gtfsId\n" +
+                "    }\n" +
+                "  }\n" +
+                "}";
+    }
 }

@@ -11,4 +11,8 @@ import java.util.List;
 public interface TripRepository extends MongoRepository<Trip, String> {
 
     List<Trip> findByStopsContaining(Stop stop);
+
+    List<Trip> findTop100ByOrderByIdAsc();
+
+    Trip findByGtfsId(String gtfsId);
 }

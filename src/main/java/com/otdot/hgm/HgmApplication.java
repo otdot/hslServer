@@ -1,8 +1,7 @@
 package com.otdot.hgm;
 
-import com.otdot.hgm.controllers.StopController;
 import com.otdot.hgm.controllers.TripController;
-import com.otdot.hgm.dtos.TripRes;
+import com.otdot.hgm.dtos.TripsRes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -39,7 +38,7 @@ public class HgmApplication {
 	CommandLineRunner runner(){
 
 		return args -> {
-			TripRes object = tripController.saveTrips();
+			TripsRes object = tripController.saveTrips();
 			System.out.println(object);
 		};
 	}

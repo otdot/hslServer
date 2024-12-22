@@ -3,7 +3,10 @@ package com.otdot.hgm.dtos;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.otdot.hgm.deserializers.TripDeserializer;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -14,9 +17,7 @@ import java.util.List;
 @Builder
 public class TripRes {
 
-    public record TripDto(@JsonProperty("gtfsId") String gtfsId, @JsonProperty("directionId") Integer directionId) {};
-
-    List<TripDto> data;
+    SimpleDtos.TripDto data;
 
 }
 
