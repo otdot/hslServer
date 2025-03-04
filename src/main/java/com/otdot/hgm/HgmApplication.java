@@ -34,12 +34,11 @@ public class HgmApplication {
 		};
 	}
 
-	@Bean
-	CommandLineRunner runner(){
-
-		return args -> {
-			TripsRes object = tripController.saveTrips();
-			System.out.println(object);
-		};
-	}
+//	@Bean
+//	CommandLineRunner runner(){
+//		return args -> {
+//			TripsRes object = tripController.saveTrips();
+//			System.out.println(object);
+//		};
+//	}
 }
